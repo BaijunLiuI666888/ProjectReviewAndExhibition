@@ -1,6 +1,6 @@
 aws configure
-AKIA53LFDJXKU2CLX3FO
-YHfOOFNGUGr51wHJVHgRixJFH3T3X34dexL/9ErS
+*tokenshere*
+*tokenshere*
 eu-west-1
 json
 
