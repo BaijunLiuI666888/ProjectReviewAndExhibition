@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Share Your feeling..</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+    <img src="../../assets/icon/add.png"/>
+  <form [formGroup]="sharingForm">
+
+
+    <ion-input type="text" formControlName="Email" value='{{userProfile?.email}}' type="hidden"></ion-input>
+
+    <ion-item>
+      <ion-label position="floating"> What it's about?</ion-label>
+      <ion-input type="text" formControlName="Title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"> Say Something...</ion-label>
+      <ion-input type="text" formControlName="Text"></ion-input>
+    </ion-item>
+
+
+    <ion-button (click)="takePic()">Share a photo?</ion-button>
+    <img src="{{image}}" onerror="this.style.display='none'" />
+    <br>
+    <ion-label position="floating"> image</ion-label>
+    <ion-input type="hidden" formControlName="Photo1" value="{{image}}"></ion-input>
+
+
+    <ion-list>
+        <ion-list-header>Multiple Selection</ion-list-header>
+      
+        <ion-item>
+          <ion-label>#Tag1</ion-label>
+          <ion-select multiple="true" cancelText="Nah" okText="Okay!">
+            <ion-select-option value="bacon">#Nice Places</ion-select-option>
+            <ion-select-option value="olives">#Travel</ion-select-option>
+            <ion-select-option value="xcheese">#Food</ion-select-option>
+            <ion-select-option value="peppers">#Drink</ion-select-option>
+            <ion-select-option value="mushrooms">#StreetWear</ion-select-option>
+            <ion-select-option value="onions">#Models</ion-select-option>
+            <ion-select-option value="pepperoni">#NiceDay</ion-select-option>
+            <ion-select-option value="pineapple">#Happy</ion-select-option>
+            <ion-select-option value="sausage">#Moody</ion-select-option>
+            <ion-select-option value="Spinach">#Cool</ion-select-option>
+          </ion-select>
+        </ion-item>
+      
+        <ion-item>
+          <ion-label>#Tag2</ion-label>
+          <ion-select multiple="true">
+              <ion-select-option value="bacon">#Nice Places</ion-select-option>
+              <ion-select-option value="olives">#Travel</ion-select-option>
+              <ion-select-option value="xcheese">#Food</ion-select-option>
+              <ion-select-option value="peppers">#Drink</ion-select-option>
+              <ion-select-option value="mushrooms">#StreetWear</ion-select-option>
+              <ion-select-option value="onions">#Models</ion-select-option>
+              <ion-select-option value="pepperoni">#NiceDay</ion-select-option>
+              <ion-select-option value="pineapple">#Happy</ion-select-option>
+              <ion-select-option value="sausage">#Moody</ion-select-option>
+              <ion-select-option value="Spinach">#Cool</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+
+    <ion-item>
+      <ion-label position="floating"> Location</ion-label>
+
+      <ion-input type="text" formControlName="Location" ></ion-input>
+    </ion-item>
+
+    <ion-button shape="round" color="primary" expand="block" [disabled]="!sharingForm.valid" (click)="savePost()">Post
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>Edit this guy</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+ 
+    <ion-item>
+      <ion-label>Name</ion-label>
+      <ion-input [(ngModel)]="cc.userName" value="{{ (cc | async)?.userName }}"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>Relation</ion-label>
+        <ion-input [(ngModel)]="cc.relation" value="{{ (cc | async)?.relation }}"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Company</ion-label>
+          <ion-input [(ngModel)]="cc.company" value="{{ (cc | async)?.company }}"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Description</ion-label>
+            <ion-input [(ngModel)]="cc.description" value="{{ (cc | async)?.description }}"></ion-input>
+          </ion-item>
+   
+  
+   
+    
+    <ion-button expand="block" (click)="updateContact(cc)">
+      SAVE 
+    </ion-button>
+  </ion-content>

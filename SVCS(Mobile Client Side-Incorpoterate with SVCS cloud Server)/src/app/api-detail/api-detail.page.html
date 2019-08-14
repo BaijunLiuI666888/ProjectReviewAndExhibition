@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-toolbar *ngFor="let ss of post">
+    <ion-title> {{ ss.Title }} </ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-icon  name="podium" routerLink="/api-edit/{{ ss.PostID }} "></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding *ngFor="let ss of post">
+  <ion-item>
+    <ion-avatar item-start>
+      <img src="data:image/png;base64,{{ ss.PhotoAVTR }}" alt="Red dot" />
+    </ion-avatar>
+    <h2> &nbsp; &nbsp; &nbsp; &nbsp; {{ ss.UserString }}</h2>
+    &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;<ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+    <ion-button color="success" routerLink="/api-edit/{{ ss.PostID }} ">{{ ss.Location }}</ion-button>
+  </ion-item>
+  <p>
+
+    {{ss.Text}}
+  </p>
+  <img src="data:image/png;base64,{{ ss.Photo1 }}" onerror="this.style.display='none'" />
+  <img src="data:image/png;base64,{{ ss.Photo2 }}" onerror="this.style.display='none'" />
+  <img src="data:image/png;base64,{{ ss.Photo3 }}" onerror="this.style.display='none'" />
+  <img src="data:image/png;base64,{{ ss.Photo4 }}" onerror="this.style.display='none'" />
+  <img src="data:image/png;base64,{{ ss.Photo5 }}" onerror="this.style.display='none'" />
+  <img src="data:image/png;base64,{{ ss.Photo6 }}" onerror="this.style.display='none'" />
+  <img src="data:image/png;base64,{{ ss.Photo7 }}" onerror="this.style.display='none'" />
+  <img src="data:image/png;base64,{{ ss.Photo8 }}" onerror="this.style.display='none'" />
+  <img src="data:image/png;base64,{{ ss.Photo9 }}" onerror="this.style.display='none'" />
+  <br>
+  <ion-note>
+    <p>{{ ss.CreateDate }}</p>
+  </ion-note>
+  <br>
+
+  <ion-row>
+
+      <ion-col *ngFor="let tt of tag">
+         
+              <ion-button size="small" color="tertiary" routerLink="/api-tag-posts/{{ tt.TagID }} ">{{ tt.TagContent }}</ion-button>
+            
+      </ion-col>
+  
+    </ion-row>
+  <ion-row>
+    <ion-col>
+
+      <button ion-button icon-start clear small (click)="Like(ss)">
+
+        <ion-icon name="thumbs-up"></ion-icon>
+        <div>LIKES:{{ ss.LikeCount }}</div>
+      </button>
+
+    </ion-col>
+    <ion-col>
+      <button ion-button icon-start clear small>
+        <ion-icon name="text"></ion-icon>
+        <div>COMMENTS:{{ ss.CommenCount }}</div>
+      </button>
+    </ion-col>
+
+  </ion-row>
+
+  <br>
+
+
+  <ion-input type="text" [(ngModel)]="commentData.postid" name="postiD" #PostID="ngModel" value='{{ss.PostID}}'
+    type="hidden">
+  </ion-input>
+  <ion-input type="text" [(ngModel)]="commentData.Email" name="Email" #UserID="ngModel" value='{{userProfile?.email}}'
+    type="hidden">
+  </ion-input>
+  <ion-item>
+     
+    <ion-textarea placeholder="Leave a comment..." rows="5" cols="33" type="text" [(ngModel)]="commentData.commentCommentText" name="commentCommentText">
+      </ion-textarea>
+    </ion-item>
+    <ion-button shape="round" color="primary" expand="block" (click)="PostComment()">
+      Comment
+    </ion-button>
+
+  
+  --------------------------------------------------------------------------------------------------------------------------
+
+  <ion-list *ngFor="let cc of comment">
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="data:image/png;base64,{{ cc.PhotoAVTR }}" alt="Red dot" />
+      </ion-avatar>
+      <h2> &nbsp; &nbsp; &nbsp; &nbsp; {{ cc.UserString }}</h2>
+    </ion-item>
+    <br>
+    <p>
+      {{cc.commentCommentText}}
+    </p>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>LIKES:{{ cc.commentLikeCount }}</div>
+        </button>
+      </ion-col>
+
+    </ion-row>
+    <p>
+      --------------------------------------------------------------------------------------------------------------------------
+    </p>
+
+
+  </ion-list>
+</ion-content>

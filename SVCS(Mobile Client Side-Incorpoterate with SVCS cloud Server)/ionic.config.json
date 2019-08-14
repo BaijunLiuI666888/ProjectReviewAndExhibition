@@ -1,0 +1,8 @@
+{
+  "name": "MCRUD",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular"
+}

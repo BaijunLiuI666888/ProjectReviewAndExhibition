@@ -1,0 +1,46 @@
+form {
+    $white-color: #fff;
+    $height100: 100%;
+    
+    ion-grid {
+        width:100%;
+        height: $height100;
+        background: #dfdfdf;
+    }
+    
+    ion-row {
+        height: $height100;
+    }
+    
+    ion-col {
+        border: 1px solid #488aff;
+        background: $white-color;
+    }
+    
+    ion-button {
+        font-weight: 300;
+    }
+    
+    @media (min-width: 240px) and (max-width: 768px) {
+        ion-grid {
+            background: $white-color;
+        }
+        ion-col {
+            border: none;
+        }
+    }
+    .invalid {
+    border-bottom: 1px solid #ff6153;
+    }
+    .error-message {
+    min-height: 2.2rem;
+    ion-label {
+    margin: 2px 0;
+    font-size: 60%;
+    color: #ff6153;
+    }
+    .item-inner {
+        border-bottom: 0 !important;
+}
+}
+}

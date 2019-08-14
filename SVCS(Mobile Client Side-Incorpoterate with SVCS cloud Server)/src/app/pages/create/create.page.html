@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+    <ion-title>New Contact</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="createContactForm" (submit)="createContact()">
+    <ion-item>
+      <ion-label stacked>His/Her Name</ion-label>
+      <ion-input formControlName="userName" type="text" 
+        placeholder="What's this guy called?">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked>Company </ion-label>
+      <ion-input formControlName="company" type="text" 
+        placeholder="Who this guys working for?">
+      </ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label stacked>relation</ion-label>
+      <ion-input formControlName="relation" type="text" 
+        placeholder="What's this relation's name?">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label stacked> Description</ion-label>
+      <ion-textarea formControlName="description" type="text" 
+        placeholder="impression about this guy?">
+      </ion-textarea>
+    </ion-item>
+
+
+    <ion-button expand="block" type="submit" 
+      [disabled]="!createContactForm.valid">
+      Add Contact
+    </ion-button>
+  </form>
+</ion-content>

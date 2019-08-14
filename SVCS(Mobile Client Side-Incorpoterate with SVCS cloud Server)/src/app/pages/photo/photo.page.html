@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Photo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="contactForm">
+
+    <ion-item>
+      <ion-label position="floating"> Email</ion-label>
+      <ion-input type="text" formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"> Title</ion-label>
+      <ion-input type="text" formControlName="title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating"> Text</ion-label>
+      <ion-input type="text" formControlName="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating"> Location</ion-label>
+      <ion-input type="text" formControlName="Location"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-button (click)="takePic()">Take a photo</ion-button>
+      <img src="{{image}}" />
+      <ion-input type="text" formControlName="photo1" value="data:image/JPEG;base64,{{ image}}"></ion-input>
+    </ion-item>
+
+    <ion-button shape="round" color="primary" expand="block" [disabled]="!contactForm.valid" (click)="savePost()">
+      Submit</ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/home">
+        <ion-icon slot="icon-only" name="home"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Recent Posting
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content padding>
+  <img src="../../assets/icon/banner.png" />
+
+  <ion-card *ngFor="let s of post " routerLink="/apiDetail/{{s.PostID}}">
+
+    <ion-item>
+      <ion-avatar item-start>
+        <img src="data:image/png;base64,{{ s.PhotoAVTR }}" alt="Red dot" />
+      </ion-avatar>
+      <h2> &nbsp; &nbsp; &nbsp; &nbsp; {{ s.UserString }}</h2>
+      &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;<ion-button color="success">{{ s.Location }}</ion-button>
+    </ion-item>
+
+
+    <div scrolly="true" id="myFixZone">
+
+      <img src="data:image/png;base64,{{ s.Photo1 }}" onerror="this.style.display='none'" />
+      <img src="data:image/png;base64,{{ s.Photo2 }}" onerror="this.style.display='none'" />
+      <img src="data:image/png;base64,{{ s.Photo3 }}" onerror="this.style.display='none'" />
+      <img src="data:image/png;base64,{{ s.Photo4 }}" onerror="this.style.display='none'" />
+      <img src="data:image/png;base64,{{ s.Photo5 }}" onerror="this.style.display='none'" />
+      <img src="data:image/png;base64,{{ s.Photo6 }}" onerror="this.style.display='none'" />
+      <img src="data:image/png;base64,{{ s.Photo7 }}" onerror="this.style.display='none'" />
+      <img src="data:image/png;base64,{{ s.Photo8 }}" onerror="this.style.display='none'" />
+      <img src="data:image/png;base64,{{ s.Photo9 }}" onerror="this.style.display='none'" />
+    </div>
+    <ion-card-content>
+      <p>{{ s.Text }} </p>
+    </ion-card-content>
+
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="thumbs-up"></ion-icon>
+          <div>Likes:{{ s.LikeCount }}</div>
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-start clear small>
+          <ion-icon name="text"></ion-icon>
+          <div>Comments:{{ s.CommenCount }}</div>
+        </button>
+      </ion-col>
+      <ion-col center text-center>
+        <ion-note>
+          <p>{{ s.CreateDate }}</p>
+        </ion-note>
+      </ion-col>
+    </ion-row>
+
+  </ion-card>
+
+
+
+</ion-content>

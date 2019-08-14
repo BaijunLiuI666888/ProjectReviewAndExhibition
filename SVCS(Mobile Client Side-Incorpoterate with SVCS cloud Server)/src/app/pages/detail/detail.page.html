@@ -1,0 +1,33 @@
+<ion-header>
+  ##
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+      </ion-buttons>
+      <ion-title>{{ (contact | async)?.userName }}</ion-title>
+      <ion-buttons slot="end">
+          <ion-icon ios="ios-brush" md="md-brush" routerLink="/edit/{{ (contact | async)?.id }}"></ion-icon>
+          </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content padding>
+    <h3> Relation </h3>
+    <p>
+      The Relation between {{ (contact | async)?.userName }} was {{ (contact | async)?.relation }}.
+    </p>
+  
+    <h3> Company </h3>
+    <p>
+      It was member of the {{ (contact | async)?.company }} company.
+    </p>
+  
+    <h3> Description </h3>
+    <p>
+      {{ (contact | async)?.description }}
+    </p>
+
+    <ion-button expand="block" (click)="deleteContact()">
+        DELETE 
+      </ion-button>
+  </ion-content>
