@@ -1,0 +1,213 @@
+﻿@model IEnumerable<SVCS.Models.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User.UserString)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Text)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo6)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo7)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo8)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Photo9)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LikeCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommenCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Location)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.UserString)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Text)
+        </td>
+        <td>
+            @if (item.Photo1 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo1);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @if (item.Photo2 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo2);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @if (item.Photo3 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo3);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @if (item.Photo4 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo4);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @if (item.Photo5 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo5);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @if (item.Photo6 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo6);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @if (item.Photo7 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo7);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @if (item.Photo8 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo8);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @if (item.Photo9 != null)
+            {
+
+                var base64 = Convert.ToBase64String(item.Photo9);
+                var imgsrc = string.Format("data:image/gif;base64,{0}", base64);
+
+
+
+                <img src='@imgsrc' style="max-width:100px;max-height:100px" />
+
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LikeCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommenCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.PostID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PostID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PostID })
+        </td>
+    </tr>
+}
+
+</table>

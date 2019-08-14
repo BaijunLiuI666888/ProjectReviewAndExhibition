@@ -1,0 +1,146 @@
+﻿@model SVCS.Models.Post
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Post</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.User.UserString)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.UserString)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Text)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Text)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo5)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo5)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo6)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo6)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo7)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo7)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo8)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo8)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Photo9)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Photo9)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LikeCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LikeCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommenCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommenCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Location)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Location)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreateDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PostID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
