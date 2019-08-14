@@ -1,0 +1,118 @@
+aws configure
+AKIA53LFDJXKU2CLX3FO
+YHfOOFNGUGr51wHJVHgRixJFH3T3X34dexL/9ErS
+eu-west-1
+json
+
+$RoleOutPut=aws iam create-role --role-name CLDCA2Role --assume-role-policy-document file://E:\AWSca2\CLDCA2Role.json
+$RoleInfo=$RoleOutPut | Out-String | ConvertFrom-Json
+$rolearn=$RoleInfo.Role.Arn
+
+aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AWSLambdaFullAccess --role-name CLDCA2Role 
+
+aws iam attach-role-policy --policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess  --role-name CLDCA2Role 
+
+
+
+aws s3api create-bucket --bucket cldca2 --region eu-west-1 --create-bucket-configuration LocationConstraint=eu-west-1
+
+
+aws s3 sync E:\AWSca2\mainpage s3://cldca2
+
+
+aws s3api put-bucket-website --bucket cldca2 --website-configuration file://E:\AWSca2\websiteHostingJson.json
+
+
+aws s3api put-bucket-policy --bucket cldca2 --policy file://E:\AWSca2\bucketPolicy.json
+
+
+
+
+
+
+
+aws dynamodb create-table --table-name Attendances --attribute-definitions AttributeName=StudentName,AttributeType=S --key-schema AttributeName=StudentName,KeyType=HASH --provisioned-throughput ReadCapacityUnits=5,WriteCapacityUnits=5
+
+
+
+
+$LambdaResourceoutput=aws lambda create-function --function-name SignStudIn --runtime nodejs8.10 --role $rolearn --handler index.handler --zip-file fileb://E:\AWSca2\index.zip
+$LambdaResourceInfo=$LambdaResourceoutput | Out-String | ConvertFrom-Json
+$LambdaARN=$LambdaResourceInfo.FunctionArn
+aws lambda create-function --function-name GenerateAttData --runtime nodejs8.10 --role $rolearn --handler GenerateAttData.handler --zip-file fileb://E:\AWSca2\GenerateAttData.zip
+
+
+$APIoutput=aws apigateway create-rest-api --name 'SignStuInAPI' --description 'lambda transit api for sign students in' --endpoint-configuration types=[REGIONAL]
+$APIInfo=$APIoutput | Out-String | ConvertFrom-Json
+$apiID=$APIInfo.id
+
+
+$Resourceoutput=aws apigateway get-resources --rest-api-id  $apiID
+$ResourceInfo=$Resourceoutput | Out-String | ConvertFrom-Json
+$ParentID=$ResourceInfo.items.id
+
+
+
+$NewResourceOutPut=aws apigateway create-resource --rest-api-id $apiID --parent-id $ParentID --path-part 'SignStuIn'
+$NewResourceInfo=$NewResourceOutPut | Out-String | ConvertFrom-Json
+$NewResourceID=$NewResourceInfo.id
+
+
+
+
+
+aws apigateway put-method --rest-api-id $apiID --resource-id $NewResourceID --http-method post --authorization-type none
+
+
+================== stop here!! the following step must be integrate manually
+test connection:
+
+{
+    
+    "httpMethod": "POST",
+    "body" : {
+    "sign" :"baijun"
+    
+    
+    
+}
+    
+    
+}
+enable api gateway cors
+ADD PERMISSION TO LAMBDA FROM API GATEWAY
+aws lambda add-permission --function-name $lambdaARN --action "lambda:InvokeFunction" --statement-id 1 --principal apigateway.amazonaws.com --source-arn arn:aws:execute-api:eu-west-1:952084155861:$apiID/*/POST/SignStuIn
+
+
+PUT INTEGRATION WITH A LAMBDA FUNCTION
+aws apigateway put-integration --rest-api-id $apiID --resource-id $NewResourceID --http-method POST --type AWS --integration-http-method POST --uri arn:aws:apigateway:eu-west-1:lambda:path/2015-03-31/functions/$lambdaARN/invocations
+
+
+INITIALIZE MAPPING TEMPLATE
+aws apigateway update-integration --rest-api-id $apiID --resource-id $NewResourceID --http-method POST --patch-operations op='add',path='/requestTemplates/application~1x-www-form-urlencoded',value='put json '
+
+
+
+204*2(method and integration response)
+
+
+aws apigateway put-method-response --rest-api-id $apiID --resource-id $NewResourceID --http-method POST --status-code 204
+
+aws apigateway put-integration-response --rest-api-id $apiID --resource-id $NewResourceID --http-method POST --status-code 204 --selection-pattern default
+
+
+
+===============================================
+
+
+aws apigateway create-deployment --rest-api-id $apiID --stage-name prod --stage-description 'Development Stage' --description 'First deployment to the prod stage'
+
+$StreamOutput=aws dynamodb update-table --table-name Attendances --stream-specification StreamEnabled=true,StreamViewType=NEW_AND_OLD_IMAGES
+$StreamInfo=$StreamOutput | Out-String | ConvertFrom-Json
+$Streamarn=$streaminfo.TableDescription.LatestStreamArn
+
+aws lambda create-event-source-mapping --event-source-arn $StreamARN --function-name GenerateAttData --starting-position LATEST
+
+*****************************************************
+upload new file 
+aws s3 sync G:\AWSca2\mainpage s3://cldca2

@@ -1,0 +1,2 @@
+server: 
+java -jar RMITASKMANAGER-1.0-SNAPSHOT.jar 12345

@@ -1,0 +1,16 @@
+$lbarn="arn:aws:iam::aws:policy/AWSLambdaFullAccess"
+$s3arn="arn:aws:iam::aws:policy/AmazonS3FullAccess"
+aws iam detach-role-policy --role-name cldca2role --policy-arn $lbarn
+aws iam detach-role-policy --role-name cldca2role --policy-arn $s3arn
+aws iam delete-role --role-name cldca2role
+
+aws s3 rm s3://cldca2/data.json
+aws s3 rm s3://cldca2/index.html
+aws s3api delete-bucket --bucket cldca2 --region eu-west-1
+
+aws dynamodb delete-table --table-name Attendances
+
+aws lambda delete-function --function-name SignStudIn 
+aws lambda delete-function --function-name GenerateAttData 
+
+aws apigateway delete-rest-api --rest-api-id $apiID
